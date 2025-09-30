@@ -1,0 +1,25 @@
+# DVC + ddoc 통합 분석 파라미터
+
+analysis:
+  data_dir: datasets/test_data
+  formats:
+    - .jpg
+    - .jpeg
+    - .png
+    - .pdf
+    - .docx
+    - .hwp
+
+embedding:
+  model: "ViT-B/16"
+  device: "cpu"
+
+clustering:
+  method: "kmeans"
+  n_clusters: null  # auto
+  selection_method: "silhouette"
+
+drift:
+  threshold_warning: 0.15
+  threshold_critical: 0.25
+  enable_auto_baseline: true

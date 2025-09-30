@@ -1,1 +1,5 @@
+# original datasets files
 **/datasets
+
+# dvc logs
+notebooks/dvclive/

@@ -1,0 +1,39 @@
+params:
+- params.yaml
+
+stages:
+  # Stage 1: ddoc 모듈로 분석 (DVC가 datasets 변경 감지)
+  analyze:
+    cmd: python analyze_with_ddoc.py
+    deps:
+    - datasets
+    - analyze_with_ddoc.py
+    params:
+    - analysis
+    - embedding
+    - clustering
+    outs:
+    - analysis/current:
+        cache: false
+    metrics:
+    - analysis/current/metrics.json:
+        cache: false
+    plots:
+    - analysis/current/plots/
+
+  # Stage 2: Baseline과 비교하여 드리프트 탐지
+  detect_drift:
+    cmd: python detect_drift.py
+    deps:
+    - analysis/current
+    - detect_drift.py
+    params:
+    - drift
+    metrics:
+    - analysis/drift/metrics.json:
+        cache: false
+    plots:
+    - analysis/drift/plots/
+    - analysis/drift/timeline.tsv:
+        x: timestamp
+        y: overall_score
