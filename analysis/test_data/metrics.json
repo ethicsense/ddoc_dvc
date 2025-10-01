@@ -1,0 +1,16 @@
+{
+  "num_files": 11,
+  "avg_size_mb": 0.889849142594771,
+  "avg_width": 2142.181818181818,
+  "avg_height": 1474.4545454545455,
+  "files_processed": 11,
+  "files_cached": 0,
+  "avg_quality_score": 39.779836070127736,
+  "avg_noise_level": 0.30237215736773804,
+  "avg_sharpness": 0.03622299336986357,
+  "num_embeddings": 11,
+  "embedding_dim": 512,
+  "num_clusters": 3,
+  "timestamp": "20251001_174451",
+  "dataset_path": "datasets/test_data"
+}
