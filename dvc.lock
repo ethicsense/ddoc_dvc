@@ -1,0 +1,56 @@
+schema: '2.0'
+stages:
+  analyze_test_data:
+    cmd: python analyze_with_ddoc.py test_data
+    deps:
+    - path: analyze_with_ddoc.py
+      hash: md5
+      md5: 5eb9c21a045460df823f657c306346a6
+      size: 15852
+    params:
+      params.yaml:
+        analysis:
+          data_dir: datasets/test_data
+          formats:
+          - .jpg
+          - .jpeg
+          - .png
+          - .pdf
+          - .docx
+          - .hwp
+        clustering:
+          method: kmeans
+          n_clusters:
+          selection_method: silhouette
+        embedding:
+          model: ViT-B/16
+          device: cpu
+    outs:
+    - path: analysis/test_data/plots/
+      hash: md5
+      md5: d4ef7ffa2f43a96ba7676554050efd58.dir
+      size: 1117365
+      nfiles: 9
+  detect_drift_test_data:
+    cmd: python detect_drift.py test_data
+    deps:
+    - path: detect_drift.py
+      hash: md5
+      md5: 5a08e9b5cb6cc0d51973482d48460f2d
+      size: 23681
+    params:
+      params.yaml:
+        drift:
+          threshold_warning: 0.15
+          threshold_critical: 0.25
+          enable_auto_baseline: true
+    outs:
+    - path: analysis/test_data/drift/plots/
+      hash: md5
+      md5: 6ffbaaad7b4ac6e1afabed19a80b2560.dir
+      size: 0
+      nfiles: 1
+    - path: analysis/test_data/drift/timeline.tsv
+      hash: md5
+      md5: f2831285b257746a0ad53092b65a4122
+      size: 91

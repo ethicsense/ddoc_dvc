@@ -1,0 +1,52 @@
+# DVC 파이프라인 및 시각화 설정
+
+params:
+  - params.yaml
+
+stages:
+  # Stage 1: 데이터셋 분석 (ddoc 모듈 활용)
+  # datasets는 별도로 dvc add로 관리
+  analyze_test_data:
+    cmd: python analyze_with_ddoc.py test_data
+    deps:
+      - analyze_with_ddoc.py
+    params:
+      - analysis
+      - embedding
+      - clustering
+    plots:
+      - analysis/test_data/plots/
+
+  # Stage 2: 드리프트 탐지
+  detect_drift_test_data:
+    cmd: python detect_drift.py test_data
+    deps:
+      - detect_drift.py
+    params:
+      - drift
+    plots:
+      - analysis/test_data/drift/plots/
+      - analysis/test_data/drift/timeline.tsv:
+          x: timestamp
+          y: overall_score
+
+# 추가 데이터셋 예시 (주석 해제하여 활성화)
+# stages:
+#   analyze_product_images:
+#     cmd: python analyze_with_ddoc.py product_images
+#     deps:
+#       - datasets/product_images
+#       - analyze_with_ddoc.py
+#     plots:
+#       - datasets/product_images/cache/plots/
+#
+#   detect_drift_product_images:
+#     cmd: python detect_drift.py product_images
+#     deps:
+#       - datasets/product_images
+#       - detect_drift.py
+#     plots:
+#       - datasets/product_images/cache/drift/plots/
+#       - datasets/product_images/cache/drift/timeline.tsv:
+#           x: timestamp
+#           y: overall_score

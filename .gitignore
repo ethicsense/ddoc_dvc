@@ -1,5 +1,15 @@
-# original datasets files
-**/datasets
+# 데이터셋 디렉토리 (DVC로 추적)
+/datasets/*
+!/datasets/*.dvc
 
-# dvc logs
+# 분석 결과는 Git에 포함 (시각화 PNG는 작은 용량)
+# /analysis/  ← 주석 처리하여 Git에 포함
+
+# DVCLive 실행 로그 (임시)
+dvclive/
+
+# notebooks 관련
 notebooks/dvclive/
+
+# backups
+**/*.bak

@@ -1,5 +1,24 @@
 # DVC + ddoc 통합 분석 파라미터
 
+# 다중 데이터셋 관리
+datasets:
+  - name: test_data
+    path: datasets/test_data
+    formats: ['.jpg', '.jpeg', '.png']
+    description: "Test dataset for drift detection"
+  
+  # 추가 데이터셋 예시 (주석 해제하여 활성화)
+  # - name: product_images
+  #   path: datasets/product_images
+  #   formats: ['.jpg', '.png']
+  #   description: "Product catalog images"
+  
+  # - name: medical_scans
+  #   path: datasets/medical_scans
+  #   formats: ['.jpg', '.dcm']
+  #   description: "Medical imaging data"
+
+# 기본 설정 (하위 호환, CLI 인자 없을 때 사용)
 analysis:
   data_dir: datasets/test_data
   formats:
